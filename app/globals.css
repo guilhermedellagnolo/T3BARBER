@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --color-gold-400: #facc15;
+  --color-gold-500: #eab308;
+  --color-gold-600: #ca8a04;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #09090b;
+  color: #fafafa;
+}
