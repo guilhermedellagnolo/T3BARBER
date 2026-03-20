@@ -196,31 +196,10 @@ function Features() {
 }
 
 /* ───────────────────────── PRICING ───────────────────────── */
-const plans = [
-  {
-    name: "Solo",
-    price: 69,
-    barbeiros: "1 barbeiro",
-    icon: <User className="h-5 w-5" />,
-    highlight: false,
-    cta: "Começar como Solo",
-  },
-  {
-    name: "Equipe",
-    price: 119,
-    barbeiros: "Até 3 barbeiros",
-    icon: <Users className="h-5 w-5" />,
-    highlight: true,
-    cta: "Escolher Equipe",
-  },
-  {
-    name: "Barbearia Pro",
-    price: 199,
-    barbeiros: "Barbeiros ilimitados",
-    icon: <Building2 className="h-5 w-5" />,
-    highlight: false,
-    cta: "Ir de Pro",
-  },
+const originalPlans = [
+  { name: "Solo", originalPrice: 69, barbeiros: "1 barbeiro" },
+  { name: "Equipe", originalPrice: 119, barbeiros: "Até 3 barbeiros" },
+  { name: "Barbearia Pro", originalPrice: 199, barbeiros: "Barbeiros ilimitados" },
 ];
 
 function Pricing() {
@@ -233,90 +212,93 @@ function Pricing() {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-yellow-500">
-            Planos
-          </p>
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-yellow-500/40 bg-yellow-500/10 px-5 py-2 text-sm font-bold text-yellow-400 animate-pulse">
+            <Zap className="h-4 w-4" />
+            Oferta de Lançamento — Vagas Limitadas
+          </div>
           <h2 className="mt-3 text-3xl font-extrabold sm:text-4xl">
-            Tudo que você viu acima. Em todos os planos.
+            Tudo que você viu acima. Por um preço único.
           </h2>
           <p className="mt-4 text-lg text-zinc-400">
             Site personalizado, App do Barbeiro, WhatsApp automático,
             onboarding feito por nós e suporte direto.{" "}
             <strong className="text-zinc-200">
-              A única diferença entre os planos é o número de barbeiros.
+              Barbeiros ilimitados. Sem surpresas.
             </strong>
           </p>
         </div>
 
-        {/* Cards grid */}
-        <div className="mx-auto mt-14 grid max-w-sm gap-6 md:max-w-none md:grid-cols-3 lg:gap-8">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`relative flex flex-col items-center rounded-3xl p-8 text-center backdrop-blur sm:p-9 ${
-                plan.highlight
-                  ? "border-2 border-yellow-500/40 bg-zinc-900/90 shadow-2xl shadow-yellow-500/10 md:scale-105"
-                  : "border border-zinc-800 bg-zinc-900/60"
-              }`}
-            >
-              {/* Badge "Mais popular" */}
-              {plan.highlight && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-yellow-500 px-4 py-1 text-xs font-bold uppercase tracking-wider text-zinc-950">
-                  Mais popular
-                </div>
-              )}
-
-              {/* Icon */}
-              <div
-                className={`mb-5 flex h-14 w-14 items-center justify-center rounded-2xl ${
-                  plan.highlight
-                    ? "bg-yellow-500/20 text-yellow-400"
-                    : "bg-zinc-800 text-zinc-400"
-                }`}
-              >
-                {plan.icon}
-              </div>
-
-              {/* Name */}
-              <h3 className="text-xl font-bold">{plan.name}</h3>
-
-              {/* Barbeiros */}
-              <p className={`mt-1 text-sm ${plan.highlight ? "text-yellow-400/80" : "text-zinc-500"}`}>
-                {plan.barbeiros}
-              </p>
-
-              {/* Preço */}
-              <div className="mt-6 flex items-baseline gap-1">
-                <span
-                  className={`text-5xl font-extrabold tracking-tight ${
-                    plan.highlight ? "text-yellow-400" : "text-zinc-100"
-                  }`}
-                >
-                  R$&nbsp;{plan.price}
-                </span>
-                <span className="text-lg text-zinc-500">/mês</span>
-              </div>
-
-              {/* CTA */}
-              <a
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`mt-8 flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-base font-bold transition active:scale-[0.98] ${
-                  plan.highlight
-                    ? "bg-yellow-500 text-zinc-950 shadow-lg shadow-yellow-500/25 hover:bg-yellow-400"
-                    : "border border-zinc-700 bg-zinc-800 text-zinc-200 hover:border-zinc-600 hover:bg-zinc-700"
-                }`}
-              >
-                <Zap className="h-4 w-4" />
-                {plan.cta}
-              </a>
+        {/* Promo Card — único plano */}
+        <div className="mx-auto mt-14 max-w-lg">
+          <div className="relative flex flex-col items-center rounded-3xl border-2 border-yellow-500/40 bg-zinc-900/90 p-10 text-center shadow-2xl shadow-yellow-500/10 backdrop-blur">
+            {/* Badge */}
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-yellow-500 px-5 py-1.5 text-xs font-bold uppercase tracking-wider text-zinc-950">
+              Oferta de Lançamento
             </div>
-          ))}
+
+            {/* Icon */}
+            <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-yellow-500/20 text-yellow-400">
+              <Crown className="h-7 w-7" />
+            </div>
+
+            <h3 className="text-2xl font-bold">Plano Completo</h3>
+            <p className="mt-1 text-sm text-yellow-400/80">Barbeiros ilimitados</p>
+
+            {/* Preços antigos riscados */}
+            <div className="mt-6 flex items-center gap-3 text-zinc-500">
+              {originalPlans.map((p) => (
+                <span key={p.name} className="text-sm line-through">
+                  R$ {p.originalPrice}
+                </span>
+              ))}
+            </div>
+
+            {/* Preço promo */}
+            <div className="mt-2 flex items-baseline gap-1">
+              <span className="text-6xl font-extrabold tracking-tight text-yellow-400">
+                R$&nbsp;50
+              </span>
+              <span className="text-lg text-zinc-500">/mês</span>
+            </div>
+
+            <p className="mt-3 text-sm text-zinc-400">
+              Tudo incluso. Sem taxa de adesão. Sem fidelidade.
+            </p>
+
+            {/* Features rápidas */}
+            <div className="mt-6 grid grid-cols-2 gap-x-6 gap-y-2 text-left text-sm text-zinc-300">
+              {[
+                "Site com a sua marca",
+                "App do Barbeiro",
+                "WhatsApp automático",
+                "Barbeiros ilimitados",
+                "Fidelidade de clientes",
+                "Agendamento fixo",
+                "Suporte direto",
+                "Configuração por nós",
+              ].map((f) => (
+                <div key={f} className="flex items-center gap-2">
+                  <Check className="h-3.5 w-3.5 shrink-0 text-yellow-500" />
+                  {f}
+                </div>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <a
+              href={WHATSAPP_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 flex w-full items-center justify-center gap-2 rounded-xl bg-yellow-500 px-6 py-4 text-lg font-bold text-zinc-950 shadow-lg shadow-yellow-500/25 transition hover:bg-yellow-400 hover:shadow-yellow-400/30 active:scale-[0.98]"
+            >
+              <Zap className="h-5 w-5" />
+              Quero garantir essa oferta
+            </a>
+          </div>
         </div>
 
         <p className="mt-8 text-center text-sm text-zinc-600">
-          Sem fidelidade. Cancele quando quiser.
+          Sem fidelidade. Cancele quando quiser. Preço promocional por tempo limitado.
         </p>
       </div>
     </section>
